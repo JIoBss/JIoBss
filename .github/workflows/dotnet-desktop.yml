@@ -1,0 +1,141 @@
+using System;
+
+namespace VisualStudio 
+{
+
+    class Program 
+    {
+
+        static void Main() 
+        {
+            Link1:
+            System.Console.WriteLine("Create new user.\n\n");
+            System.Console.Write("Please, enter user name: ");
+            string name = Console.ReadLine();
+            System.Console.Write("Enter {0} role: ", name);
+            string role = Console.ReadLine();
+            LinkPassword:
+            System.Console.Write("Write new password: ");
+            string password = Console.ReadLine();
+            System.Console.WriteLine("Welcome! Your password: {0}.\n{1} {2} enters the sistem.\n\n", password, role, name);
+
+            LinkHotKeys:
+            System.Console.WriteLine("Hot-key: X = exit, L = lock, D = Data, E = The end.");
+            string hotkey = Console.ReadLine();
+
+            if(hotkey == "X")
+            {
+                System.Console.WriteLine("Do you really want to log out? Y/n");
+                string symbol = Console.ReadLine();
+                if(symbol == "Y")
+                {
+                    System.Console.WriteLine("You already log out.\n");
+                    Link3:
+                    System.Console.WriteLine("Choose, what you want to made?");
+                    Link4:
+                    System.Console.WriteLine("Create new user (1) / sing in {0} account (2).", name);
+                    string choice = Console.ReadLine();
+                    if(choice == "1")
+                        goto Link1;
+                    else if(choice == "2")
+                    {
+                        System.Console.Write("{0} account. Enter the password: ", name);
+                        string password_1 = Console.ReadLine();
+                        if(password_1 == password)
+                        {
+                            System.Console.WriteLine("Welcome {0}!", name);
+                            goto LinkHotKeys;
+                        }
+                        else
+                        {
+                            System.Console.WriteLine("Uncorrect password.\n");
+                            goto Link3;
+                        }
+                    }
+                    else
+                    {
+                        System.Console.WriteLine("Uncorrect symbol!\n");
+                        goto Link4;
+                    }
+                }
+                else if(symbol == "n")
+                    goto LinkHotKeys;
+                else
+                {
+                    System.Console.WriteLine("Uncorrect symbol!\n");
+                    goto LinkHotKeys;
+                }
+            }
+            else if(hotkey == "L")
+            {
+                Link3:
+                System.Console.Write("Etner the {0} account password: ", name);
+                string password_1 = Console.ReadLine();
+                if(password_1 == password)
+                {
+                    System.Console.WriteLine("Welcome! You enter the correct password.\n");
+                    goto LinkHotKeys;
+                }
+                else
+                {
+                    System.Console.WriteLine("Uncorrect password!\n");
+                    goto Link3;
+                }
+            }
+            else if(hotkey == "E")
+            {
+                System.Console.WriteLine("Do you really want to off terminal? Y/n");
+                string symbol = Console.ReadLine();
+                if(symbol == "n")
+                {
+                    goto LinkHotKeys;
+                }
+                else if(symbol == "Y")
+                    System.Console.WriteLine("Hall off..");
+                else
+                {
+                    System.Console.WriteLine("Uncorrect symbol!\n");
+                    goto LinkHotKeys;
+                }
+            }
+            else if(hotkey == "D")
+            {
+                System.Console.Write("Enter the active password: ");
+                string password_1 = Console.ReadLine();
+                if(password_1 == password)
+                {
+                    LinkData:
+                    System.Console.WriteLine("User name: {0}.", name);
+                    System.Console.WriteLine("User role: {0}.", role);
+                    System.Console.WriteLine("{0} password: {1}.", name, password);
+                    System.Console.WriteLine("If you want to change your password, press C");
+                    System.Console.WriteLine("If you do not want to change your password, press H");
+                    string symbol = Console.ReadLine();
+                    if(symbol == "C")
+                    {
+                        System.Console.WriteLine("Change password? Y/n.");
+                        string symbol1 = Console.ReadLine();
+                        if(symbol1 == "Y")
+                            goto LinkPassword;
+                        else if(symbol1 == "n")
+                            goto LinkData;
+                        else
+                        {
+                            System.Console.WriteLine("Uncorrect symbol!");
+                            goto LinkData;
+                        }
+                    }
+                    else if(symbol == "H")
+                        goto LinkHotKeys;
+                }
+            }
+            else
+            {
+                System.Console.WriteLine("Hot-key dont unidentidied.");
+                goto LinkHotKeys;
+            }
+        }
+
+    }
+
+}
